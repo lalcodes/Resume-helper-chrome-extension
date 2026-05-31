@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "AI Cover Letter Generator",
+  "version": "1.0.0",
+  "description": "Scrapes job descriptions and generates cover letters using Gemini API.",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*",
+        "*://*.indeed.com/*",
+        "*://*.greenhouse.io/*",
+        "*://*.lever.co/*",
+        "*://*.workday.com/*"
+      ],
+      "js": ["content/scraper.js"]
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open Cover Letter Generator",
+    "default_icon": {
+      "16": "background/logo.png",
+      "32": "background/logo.png",
+      "48": "background/logo.png",
+      "128": "background/logo.png"
+    }
+  },
+  "icons": {
+    "16": "background/logo.png",
+    "32": "background/logo.png",
+    "48": "background/logo.png",
+    "128": "background/logo.png"
+  }
+}

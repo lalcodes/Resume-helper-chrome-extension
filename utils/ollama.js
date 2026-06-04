@@ -22,8 +22,68 @@ export async function* generateOllamaCoverLetter({ jdText, resumeText, tone, mod
     throw new Error("Ollama model name is missing. Please save it in settings.");
   }
 
-  // Exact prompt template matching our Gemini prompt
-  const prompt = `You are a professional cover letter writer. Write a concise, compelling cover letter (3 paragraphs) for the following job. Tone: ${tone}. Always start with generic greetings (DO NOT INCLUDE COMPANY NAMES NOR PERSONS NAMES) and end the letter with regards(Include contact info and social handles if available). Only mention skills present in the candidate profile. Do not use generic filler phrases like 'I am a passionate...'.\n\nJOB DESCRIPTION:\n${jdText}\n\nCANDIDATE PROFILE:\n${resumeText}\n\nCover letter:`;
+  const date = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+  // Exact prompt template from rules
+  const prompt = `You are a professional cover letter writer. Write a concise, compelling cover letter in exactly 3 paragraphs.
+
+TONE: ${tone}
+
+---
+
+FORMATTING RULES
+
+Header 
+1. Candidate name — all caps, on its own line at the top
+2. Contact details: include email, phone, and any social/portfolio handles present in the candidate profile
+--
+Leave some space 
+--
+3. Date (${date})
+4. Hiring manager block — only if the name and/or title appear in the job description:
+   [Hiring Manager Name and Title]
+   [Company Name]
+   [Company Address or City]
+   If this information is not in the job description, omit the block entirely.
+
+Target role block (below the header, left-aligned):
+[Job Title applied for]
+[Company Name]
+[Company City or Address]
+
+---
+
+WRITING RULES
+
+- Open with a professional salutation. If the hiring manager's name is available, address them directly (e.g. "Dear Ms. Sharma,"). If not, use "Dear Hiring Team,"
+- End the letter with a formal closing and regards (e.g. "Sincerely," or "Best regards,") with name
+- Only mention skills, tools, and experiences that are explicitly present in the candidate profile — do not invent or assume any
+- Do not use generic filler phrases. Examples to avoid:
+  "I am a passionate…"
+  "I am deeply committed to…"
+  "With a proven track record of…"
+  "I am excited about the opportunity to…"
+  "I would be a great fit for…"
+
+---
+
+INPUTS
+
+<job_description>
+${jdText}
+</job_description>
+
+<candidate_profile>
+${resumeText}
+</candidate_profile>
+
+---
+
+Cover letter:`
 
   const url = `${ollamaUrl.replace(/\/$/, "")}/api/generate`;
   const requestOptions = {
@@ -71,7 +131,7 @@ export async function* generateOllamaCoverLetter({ jdText, resumeText, tone, mod
       if (done) break;
 
       buffer += decoder.decode(value, { stream: true });
-      
+
       const lines = buffer.split("\n");
       // Keep last incomplete segment in buffer
       buffer = lines.pop();

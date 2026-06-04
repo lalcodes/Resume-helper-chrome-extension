@@ -1,0 +1,31 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE and Text Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs and Debug files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local environment / API key files (if any are created)
+.env
+.env.local
+.env.*.local
+*.local.js
+config.local.json
+
+# IDE / Extension agent temporary files
+.antigravity/
+.agents/

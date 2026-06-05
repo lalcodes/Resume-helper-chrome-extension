@@ -33,37 +33,8 @@ An elegant, premium Chrome Extension (Manifest V3) designed to optimize resumes 
 *   **Exports:** Quick buttons to copy to clipboard, download as Microsoft Word (`.doc`), or export as a styled client-side PDF.
 
 ### ⚙️ Extensible LLM Support
-*   **Gemini Cloud API:** Leverages Google's `gemini-2.0-flash` model for high-speed, state-of-the-art responses.
+*   **Gemini Cloud API:** Leverages Google's `gemini-3.5-flash` model for high-speed, state-of-the-art responses.
 *   **Local Ollama Integration:** Enables fully offline runs with custom URLs and CORS checks.
-
----
-
-## 📁 File Structure
-
-```text
-├── background/
-│   ├── logo.png                   # Extension logo / action icon
-│   └── service-worker.js          # Service worker configured to launch the side panel
-├── content/
-│   └── scraper.js                 # Content script injected into job boards to extract JD text
-├── libs/
-│   ├── jspdf.umd.min.js           # Client-side PDF generation utility
-│   ├── jszip.min.js               # Local JSZip utility to repack DOCX files under MV3 CSP rules
-│   ├── pdf.min.js                 # PDF.js core library
-│   └── pdf.worker.min.js          # PDF.js worker logic
-├── sidepanel/
-│   ├── sidepanel.html             # Dark-themed glassmorphism interface (ATS-focused layout)
-│   └── sidepanel.js               # Main panel logic, event handlings, slider hooks, and downloads
-├── utils/
-│   ├── ats-rewriter.js            # Generator for streaming ATS optimization rewrites
-│   ├── docx-editor.js             # Handles local XML text extraction and lossless injection in DOCX files
-│   ├── gemini.js                  # Stream generator for Google Gemini API
-│   ├── matcher.js                 # Non-streaming Match Scorer via Gemini
-│   ├── ollama.js                  # Stream generator for Local Ollama API
-│   └── storage.js                 # Promise-based wrapper for chrome.storage.local
-├── manifest.json                  # Manifest V3 extension configuration
-└── README.md                      # Project documentation
-```
 
 ---
 

@@ -2,7 +2,7 @@
 .DS_Store
 Thumbs.db
 Desktop.ini
-
+rules.md
 # IDE and Text Editor configurations
 .vscode/
 .idea/

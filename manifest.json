@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "AI Cover Letter Generator",
+  "name": "ResuMate AI",
   "version": "1.0.0",
   "description": "Scrapes job descriptions and generates cover letters using Gemini API.",
   "permissions": [
@@ -25,7 +25,9 @@
         "*://*.lever.co/*",
         "*://*.workday.com/*"
       ],
-      "js": ["content/scraper.js"]
+      "js": [
+        "content/scraper.js"
+      ]
     }
   ],
   "side_panel": {

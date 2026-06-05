@@ -4,7 +4,7 @@
  */
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("AI Cover Letter Generator installed.");
+  console.log("ResuMate AI installed.");
 });
 
 // Configure side panel behavior

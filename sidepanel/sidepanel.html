@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Cover Letter Generator</title>
+  <title>ResuMate AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -481,9 +481,266 @@
       background-color: var(--accent) !important;
       color: white !important;
     }
-    
+
     .toggle-option:hover:not(.active) {
       color: var(--text-primary);
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .tab-nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 4px;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .tab-nav-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-nav-btn.active {
+      color: var(--accent);
+    }
+
+    .tab-nav-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    .tab-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.hidden {
+      display: none !important;
+    }
+
+    /* Badges & Pills */
+    .badge-success {
+      background-color: rgba(16, 185, 129, 0.15) !important;
+      color: var(--success) !important;
+      border: 1px solid var(--success) !important;
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.15) !important;
+      color: #f59e0b !important;
+      border: 1px solid #f59e0b !important;
+    }
+
+    .score-badge {
+      font-size: 14px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .score-red {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    .score-amber {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid #f59e0b;
+    }
+
+    .score-green {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 12px;
+    }
+
+    .pill-green {
+      background-color: rgba(16, 185, 129, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .pill-red {
+      background-color: rgba(239, 68, 68, 0.12);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Banners styling */
+    .banner-danger {
+      background-color: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--text-primary);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .banner-warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      border: 1px solid #f59e0b;
+      color: var(--text-primary);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .banner-success {
+      background-color: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .banner-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .banner-btn {
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .banner-btn-yes {
+      background-color: #f59e0b;
+      color: white;
+    }
+
+    .banner-btn-yes:hover {
+      background-color: #d97706;
+    }
+
+    .banner-btn-no {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .banner-btn-no:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    /* Diff View Styling */
+    .diff-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      max-height: 350px;
+      overflow-y: auto;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+    }
+
+    .diff-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .diff-line {
+      min-height: 18px;
+      line-height: 1.5;
+      padding: 1px 4px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .diff-line.changed {
+      border-left: 3px solid #f59e0b;
+      /* Left amber border */
+      background-color: rgba(245, 158, 11, 0.08);
+      /* Amber-tinted background */
+    }
+
+    /* Dual Range Slider styling */
+    .dual-range-slider input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 30px;
+      margin: 0;
+      pointer-events: none;
+      background: none;
+      outline: none;
+    }
+
+    .dual-range-slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.15s ease;
+    }
+
+    .dual-range-slider input[type="range"]::-webkit-slider-thumb:hover {
+      background: var(--accent);
+    }
+
+    .dual-range-slider input[type="range"]::-moz-range-thumb {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.15s ease;
+    }
+
+    .dual-range-slider input[type="range"]::-moz-range-thumb:hover {
+      background: var(--accent);
     }
   </style>
 </head>
@@ -495,13 +752,15 @@
     <div style="display: flex; align-items: center; gap: 8px;">
       <img src="../background/logo.png" alt="Logo"
         style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
-      <h1 id="panel-title" style="font-size: 16px;">AI Cover Letter</h1>
+      <h1 id="panel-title" style="font-size: 16px;">ResuMate AI</h1>
     </div>
     <div style="display: flex; align-items: center; gap: 8px;">
       <!-- LLM Backend Toggle -->
       <div class="toggle-container">
-        <button id="toggle-gemini-btn" class="toggle-option active" type="button" title="Use Gemini Cloud API">Gemini</button>
-        <button id="toggle-ollama-btn" class="toggle-option" type="button" title="Use Local LLM (Ollama)">Ollama</button>
+        <button id="toggle-gemini-btn" class="toggle-option active" type="button"
+          title="Use Gemini Cloud API">Gemini</button>
+        <button id="toggle-ollama-btn" class="toggle-option" type="button"
+          title="Use Local LLM (Ollama)">Ollama</button>
       </div>
       <button id="gear-btn" class="icon-btn" title="API Settings">⚙</button>
     </div>
@@ -530,60 +789,218 @@
         placeholder="Job description will load automatically when you visit a job posting. You can also paste it here."></textarea>
     </div>
 
-    <!-- Resume Input -->
-    <div class="section-card" id="resume-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-        <label for="resume-text">Your Profile / Resume</label>
-        <div style="display: flex; gap: 6px;">
-          <button id="upload-trigger-btn" class="icon-btn" style="font-size: 12px; padding: 2px 6px;"
-            title="Upload PDF Resume">📄 Upload PDF</button>
-          <button id="clear-resume-btn" class="icon-btn"
-            style="font-size: 12px; padding: 2px 6px; color: var(--danger);" type="button" title="Clear Resume">❌
-            Clear</button>
+    <!-- Tabs Navigation -->
+    <div class="tabs-nav">
+      <button id="tab-nav-ats" class="tab-nav-btn active" type="button">ATS Resume</button>
+      <button id="tab-nav-cover" class="tab-nav-btn" type="button">Cover Letter</button>
+    </div>
+
+    <!-- Tab 1: Cover Letter Content -->
+    <div id="tab-content-cover" class="tab-pane hidden">
+      <!-- Resume Input -->
+      <div class="section-card" id="resume-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <label for="resume-text">Your Profile / Resume</label>
+          <div style="display: flex; gap: 6px;">
+            <button id="upload-trigger-btn" class="icon-btn" style="font-size: 12px; padding: 2px 6px;"
+              title="Upload PDF Resume">📄 Upload PDF</button>
+            <button id="clear-resume-btn" class="icon-btn"
+              style="font-size: 12px; padding: 2px 6px; color: var(--danger);" type="button" title="Clear Resume">❌
+              Clear</button>
+          </div>
+        </div>
+
+        <!-- File Status Banner -->
+        <div id="file-status-banner" class="file-status-banner" style="display: none;">
+          <span id="file-status-text" class="file-status-text">resume.pdf (0 KB)</span>
+          <button id="clear-file-btn" class="icon-btn" style="font-size: 12px; padding: 2px; color: var(--danger);"
+            type="button" title="Clear file">❌</button>
+        </div>
+
+        <input type="file" id="resume-file" accept=".pdf" style="display: none;">
+        <textarea id="resume-text"
+          placeholder="Paste your resume, skills list, and professional background here, or drag & drop/upload a PDF resume."></textarea>
+      </div>
+
+      <!-- Tone and Action -->
+      <div class="section-card" style="flex-direction: row; align-items: center; justify-content: space-between;">
+        <div style="width: 45%;">
+          <label for="tone-select">Tone</label>
+          <select id="tone-select">
+            <option value="Formal">Formal</option>
+            <option value="Confident">Confident</option>
+            <option value="Friendly">Friendly</option>
+          </select>
+        </div>
+        <div style="width: 50%; margin-top: 15px;">
+          <button id="generate-btn" class="btn btn-primary">Generate</button>
         </div>
       </div>
 
-      <!-- File Status Banner -->
-      <div id="file-status-banner" class="file-status-banner" style="display: none;">
-        <span id="file-status-text" class="file-status-text">resume.pdf (0 KB)</span>
-        <button id="clear-file-btn" class="icon-btn" style="font-size: 12px; padding: 2px; color: var(--danger);"
-          type="button" title="Clear file">❌</button>
-      </div>
-
-      <input type="file" id="resume-file" accept=".pdf" style="display: none;">
-      <textarea id="resume-text"
-        placeholder="Paste your resume, skills list, and professional background here, or drag & drop/upload a PDF resume."></textarea>
-    </div>
-
-    <!-- Tone and Action -->
-    <div class="section-card" style="flex-direction: row; align-items: center; justify-content: space-between;">
-      <div style="width: 45%;">
-        <label for="tone-select">Tone</label>
-        <select id="tone-select">
-          <option value="Formal">Formal</option>
-          <option value="Confident">Confident</option>
-          <option value="Friendly">Friendly</option>
-        </select>
-      </div>
-      <div style="width: 50%; margin-top: 15px;">
-        <button id="generate-btn" class="btn btn-primary">Generate</button>
+      <!-- Generated Cover Letter Output -->
+      <div class="output-card">
+        <div class="output-header">
+          <label>Cover Letter Output</label>
+          <div style="display: flex; gap: 6px;">
+            <button id="copy-btn" class="btn btn-secondary"
+              style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">📋 Copy</button>
+            <button id="download-docx-btn" class="btn btn-secondary"
+              style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">📄 Word</button>
+            <button id="download-pdf-btn" class="btn btn-secondary"
+              style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">🖨️ PDF</button>
+          </div>
+        </div>
+        <div id="output-content" contenteditable="true" class="placeholder-text">Cover letter will appear here...</div>
       </div>
     </div>
 
-    <!-- Generated Cover Letter Output -->
-    <div class="output-card">
-      <div class="output-header">
-        <label>Cover Letter Output</label>
-        <div style="display: flex; gap: 6px;">
-          <button id="copy-btn" class="btn btn-secondary"
-            style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">📋 Copy</button>
-          <button id="download-docx-btn" class="btn btn-secondary"
-            style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">📄 Word</button>
-          <button id="download-pdf-btn" class="btn btn-secondary"
-            style="width: auto; padding: 4px 10px; font-size: 11px; display: none;">🖨️ PDF</button>
+    <!-- Tab 2: ATS Resume Content -->
+    <div id="tab-content-ats" class="tab-pane">
+      <!-- SECTION 1: Upload -->
+      <div class="section-card">
+        <label>STEP 1 — Upload Resume</label>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <button id="ats-upload-btn" class="btn btn-secondary"
+                style="width: auto; padding: 8px 12px; font-size: 12px;" type="button">
+                📁 Select File (.docx, .pdf)
+              </button>
+              <button id="ats-clear-btn" class="icon-btn"
+                style="font-size: 12px; padding: 2px 6px; color: var(--danger); border: 1px solid var(--border-color); border-radius: var(--radius-sm); height: 32px; display: none;"
+                type="button" title="Clear Uploaded Resume">❌ Clear</button>
+            </div>
+            <span id="ats-file-badge" class="scraper-badge hidden"
+              style="text-transform: none; font-weight: 500;"></span>
+          </div>
+          <input type="file" id="ats-file-input" accept=".docx,.pdf" style="display: none;">
+          <div id="ats-file-info" style="font-size: 12px; color: var(--text-secondary); word-break: break-all;"></div>
+
+          <textarea id="ats-resume-text" readonly placeholder="Your resume text will appear here after upload..."
+            style="min-height: 100px; background-color: var(--bg-tertiary); color: var(--text-secondary); cursor: not-allowed;"></textarea>
+
+          <p style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 2px;">
+            Your file never leaves your device — all processing is local + Gemini API.
+          </p>
         </div>
       </div>
-      <div id="output-content" contenteditable="true" class="placeholder-text">Cover letter will appear here...</div>
+
+      <!-- SECTION 2: Match Analysis -->
+      <div class="section-card">
+        <label>STEP 2 — Match Analysis</label>
+
+        <!-- Custom Threshold Slider -->
+        <div class="threshold-slider-container"
+          style="margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">Custom Match
+            Thresholds</label>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary);">
+            <span>Skip: &lt; <strong id="threshold-min-val">40</strong>%</span>
+            <span>Partial: <strong id="threshold-min-range">40</strong>% - <strong
+                id="threshold-max-range">65</strong>%</span>
+            <span>Proceed: &ge; <strong id="threshold-max-val">65</strong>%</span>
+          </div>
+
+          <div class="dual-range-slider" style="position: relative; width: 100%; height: 30px; margin-top: 4px;">
+            <!-- The shared background track -->
+            <div
+              style="position: absolute; top: 12px; left: 0; right: 0; height: 6px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 3px; z-index: 1;">
+            </div>
+            <!-- The active track between the handles -->
+            <div id="slider-active-track"
+              style="position: absolute; top: 12px; height: 6px; background-color: var(--accent); border-radius: 3px; z-index: 2; left: 40%; right: 35%;">
+            </div>
+
+            <!-- Overlapping range inputs -->
+            <input type="range" id="threshold-min-input" min="0" max="100" value="40"
+              style="position: absolute; width: 100%; top: 0; left: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; z-index: 3;">
+            <input type="range" id="threshold-max-input" min="0" max="100" value="65"
+              style="position: absolute; width: 100%; top: 0; left: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; z-index: 4;">
+          </div>
+        </div>
+
+        <button id="ats-analyze-btn" class="btn btn-primary" disabled type="button">Analyze Match</button>
+
+        <!-- Loading Spinner -->
+        <div id="ats-spinner" class="loader-container hidden" style="height: 100px;">
+          <div class="pulsating-circle"></div>
+          <span style="font-size: 12px; color: var(--text-secondary);">Analyzing your resume against the JD...</span>
+        </div>
+
+        <!-- Match Result Details -->
+        <div id="ats-match-result" class="hidden"
+          style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-weight: 600;">Match Score:</span>
+            <span id="ats-score-badge" class="score-badge">0%</span>
+          </div>
+
+          <!-- Score Slider Bar -->
+          <div class="score-slider-container" style="margin-top: -4px;">
+            <div
+              style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-secondary); margin-bottom: 4px;">
+              <span>Weak (0%)</span>
+              <span>Strong (100%)</span>
+            </div>
+            <div
+              style="position: relative; width: 100%; height: 6px; background-color: var(--bg-tertiary); border-radius: 3px; border: 1px solid var(--border-color); overflow: hidden;">
+              <div id="ats-score-slider"
+                style="width: 0%; height: 100%; background-color: var(--text-muted); transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 11px; color: var(--success); font-weight: 600;">Matched Skills</label>
+            <div id="ats-matched-skills" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;"></div>
+          </div>
+
+          <div>
+            <label style="font-size: 11px; color: var(--danger); font-weight: 600;">Missing Skills</label>
+            <div id="ats-missing-skills" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;"></div>
+          </div>
+
+          <div style="font-size: 13px; border-top: 1px solid var(--border-color); padding-top: 8px;">
+            <span style="font-weight: 600; color: var(--text-secondary);">Reason:</span>
+            <p id="ats-reason-text" style="color: var(--text-primary); margin-top: 2px; line-height: 1.4;"></p>
+          </div>
+        </div>
+
+        <!-- Banners/Statuses -->
+        <div id="ats-match-status-banner" style="margin-top: 8px;"></div>
+      </div>
+
+      <!-- SECTION 3: Output -->
+      <div class="section-card">
+        <label>STEP 3 — ATS Optimized Resume</label>
+        <button id="ats-generate-btn" class="btn btn-primary" disabled type="button">Generate Optimized Resume</button>
+
+        <!-- Generation Spinner -->
+        <div id="ats-gen-spinner" class="loader-container hidden" style="height: 100px;">
+          <div class="pulsating-circle"></div>
+          <span style="font-size: 12px; color: var(--text-secondary);">AI is optimizing your resume...</span>
+        </div>
+
+        <!-- Output Diff Display -->
+        <div id="ats-output-container" class="hidden"
+          style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+          <label style="font-size: 11px; color: var(--accent); font-weight: 600;">Side-by-Side Comparison</label>
+          <div class="diff-wrapper">
+            <div class="diff-column" id="diff-original"></div>
+            <div class="diff-column" id="diff-rewritten"></div>
+          </div>
+
+          <!-- Actions Below Diff -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;">
+            <button id="ats-copy-btn" class="btn btn-secondary" style="padding: 8px 4px; font-size: 11px;"
+              type="button">📋 Copy</button>
+            <button id="ats-download-docx-btn" class="btn btn-secondary" style="padding: 8px 4px; font-size: 11px;"
+              type="button">📄 DOCX</button>
+            <button id="ats-download-pdf-btn" class="btn btn-secondary" style="padding: 8px 4px; font-size: 11px;"
+              type="button">🖨️ PDF</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -596,7 +1013,9 @@
 
     <!-- Gemini Card -->
     <div class="section-card">
-      <label style="font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 2px; letter-spacing: 0.05em;">Gemini Cloud API</label>
+      <label
+        style="font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 2px; letter-spacing: 0.05em;">Gemini
+        Cloud API</label>
       <label for="api-key-input">Gemini API Key</label>
       <div class="input-wrapper">
         <input type="password" id="api-key-input" placeholder="AIzaSy...">
@@ -607,18 +1026,22 @@
       </p>
       <div id="settings-status" class="status-message"></div>
       <div class="settings-actions" style="margin-top: 8px;">
-        <button id="test-key-btn" class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Test Gemini</button>
-        <button id="save-key-btn" class="btn btn-primary" style="padding: 8px 12px; font-size: 12px;">Save Gemini</button>
+        <button id="test-key-btn" class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Test
+          Gemini</button>
+        <button id="save-key-btn" class="btn btn-primary" style="padding: 8px 12px; font-size: 12px;">Save
+          Gemini</button>
       </div>
     </div>
 
     <!-- Ollama Card -->
     <div class="section-card" style="margin-top: 8px;">
-      <label style="font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 2px; letter-spacing: 0.05em;">Ollama Local LLM</label>
-      
+      <label
+        style="font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 2px; letter-spacing: 0.05em;">Ollama
+        Local LLM</label>
+
       <label for="ollama-url-input">Ollama Server URL</label>
       <input type="text" id="ollama-url-input" placeholder="http://localhost:11434" value="http://localhost:11434">
-      
+
       <label for="ollama-model-input" style="margin-top: 6px;">Ollama Model Name</label>
       <input type="text" id="ollama-model-input" placeholder="gemma" value="gemma">
       <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
@@ -626,8 +1049,10 @@
       </p>
       <div id="ollama-status" class="status-message"></div>
       <div class="settings-actions" style="margin-top: 8px;">
-        <button id="test-ollama-btn" class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Test Ollama</button>
-        <button id="save-ollama-btn" class="btn btn-primary" style="padding: 8px 12px; font-size: 12px;">Save Ollama</button>
+        <button id="test-ollama-btn" class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Test
+          Ollama</button>
+        <button id="save-ollama-btn" class="btn btn-primary" style="padding: 8px 12px; font-size: 12px;">Save
+          Ollama</button>
       </div>
     </div>
   </div>

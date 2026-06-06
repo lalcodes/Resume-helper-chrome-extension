@@ -69,7 +69,7 @@ ${resumeText}`;
 
     const data = await response.json();
     let text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    
+
     // Strip any markdown fences
     text = text.replace(/```json/g, "").replace(/```/g, "").trim();
 

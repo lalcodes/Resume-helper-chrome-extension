@@ -1,35 +1,26 @@
 # ResuMate AI (Chrome Extension)
 
-An elegant, premium Chrome Extension (Manifest V3) designed to optimize resumes for ATS compatibility and generate highly-tailored cover letters instantly. By utilizing the `chrome.sidePanel` API, the extension remains accessible on your screen while you browse job listings on popular platforms. It extracts job descriptions automatically, parses your resume (.docx or .pdf) client-side, runs match analysis against job criteria, rewrites resumes for ATS optimization, and streams cover letters directly from Google's **Gemini API** or your local **Ollama** server.
+An elegant, premium Chrome Extension (Manifest V3) designed to optimize resumes for ATS compatibility and generate highly-tailored cover letters instantly. By utilizing the `chrome.sidePanel` API, the extension remains accessible on your screen while you browse job listings on popular platforms. It extracts job descriptions, parses your resume (.docx or .pdf), runs match analysis against job criteria, rewrites resumes for ATS optimization, and streams cover letters directly from Google's **Gemini API** or your local **Ollama** server.
 
 ---
 
 ## 🌟 Key Features
 
-### 📋 ATS Resume Optimizer (Primary Tab)
-*   **Multi-Format Resume Upload:** Supports drag-and-drop or file upload for both Microsoft Word (`.docx`) and Adobe PDF (`.pdf`) formats.
+### 📋 ATS Resume Optimizer
+*   **Multi-Format Resume Upload:** Supports both Microsoft Word (`.docx`) and Adobe PDF (`.pdf`) formats.
 *   **Structure Badges:** Instantly informs the user of format support:
     *   `Structure preserved ✓` (Green) for `.docx` uploads indicating that structural layout remains intact.
     *   `Content only — layout will be rebuilt` (Amber) for `.pdf` uploads.
 *   **Local Processing & Security:** All resume file parsing is executed client-side on the device. Resume details are saved in `chrome.storage.local` and never shared with third-party servers (except directly via the Gemini API/Ollama server).
 *   **Dynamic Threshold Match Slider:** Features a double-ended slider to dynamically adjust the minimum and maximum threshold levels for job matching on a single slider bar.
-*   **Instant Match Analysis:** Automatically scores the resume (`scoreMatch()`) and renders:
-    *   A dynamic color-coded Score Badge (Red `< 40`, Amber `40 - 65`, Green `≥ 65`).
-    *   Match pills (Matched Skills in green, Missing Skills in red).
-    *   AI-powered recommendation banners ("Proceed", "Partial Match", or "Skip") with reasoning that dynamically update when the threshold sliders are adjusted.
-*   **ATS Optimization & Rewrite (`rewriteForATS()`):** Streams optimized text updates via Gemini.
-    *   *Rules-enforced alignment:* Rewords bullets to incorporate key JD keywords using strong action verbs (*led*, *built*, *optimized*) and tailors the professional summary.
-    *   *Chronology Protection:* Strictly preserves the applicant's chronological ordering of roles (latest at the top) even if the latest job is not correlated with the JD.
-    *   *Data Safeguards:* Never invents skills, projects, or achievements not present in the original resume. Never alters job titles, companies, dates, or education.
+*   **ATS Optimization & Rewrite :** Streams optimized text updates via Gemini/Local LLM.
 *   **Side-by-Side Diff Preview:** Displays a comparative highlight box matching the original resume structure alongside the optimized resume for clear visual diff checking.
-*   **Lossless Word Export:** Repacks the optimized text back into the uploaded `.docx` zip structure client-side via `jszip.min.js`, updating text nodes (`<w:t>`) while keeping all styling, margins, fonts, and headers intact.
-*   **Multi-Format Exports:** Download optimized resumes directly as `.docx`, `.pdf`, or `.txt`.
+*   **Multi-Format Exports:** Download optimized resumes directly as `.docx`, `.pdf` or copy to clipboard.
 
-### ✉️ Cover Letter Generator (Secondary Tab)
+### ✉️ Cover Letter Generator
 *   **Scraped JD & Profile Auto-Population:** Automatically pulls the active job description and current resume text.
 *   **Dynamic Tone Selector:** Instantly adapts style (Formal, Confident, or Friendly).
 *   **Anti-Hallucination Guardrails:** Restricts letter details exclusively to elements present in the candidate's uploaded resume profile.
-*   **Streaming Output:** Streams paragraphs word-by-word with a breathing dot loader.
 *   **Exports:** Quick buttons to copy to clipboard, download as Microsoft Word (`.doc`), or export as a styled client-side PDF.
 
 ### ⚙️ Extensible LLM Support
@@ -95,7 +86,7 @@ Open the side panel by clicking the extension action icon, then click the gear i
 ### Step 4: Optimize & Rewrite
 1. Scroll down to Section 3 of the ATS Resume tab and click **Optimize Resume**.
 2. View the optimization diff layout (Original vs. Rewritten) as it streams.
-3. Export your optimized resume by selecting **DOCX**, **PDF**, or **TXT**.
+3. Export your optimized resume by selecting **DOCX** or **PDF**
 
 ### Step 5: Draft a Cover Letter
 1. Click the **Cover Letter** tab.

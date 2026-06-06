@@ -4,7 +4,7 @@
 
 import { getStorageItem, setStorageItem } from "../utils/storage.js";
 import { generateCoverLetter } from "../utils/gemini.js";
-import { generateOllamaCoverLetter } from "../utils/ollama.js";
+import { generateOllamaCoverLetter, scoreMatchOllama, rewriteForATSOllama } from "../utils/ollama.js";
 import { extractDocxText, injectRewrittenText, loadJSZip } from "../utils/docx-editor.js";
 import { scoreMatch } from "../utils/matcher.js";
 import { rewriteForATS } from "../utils/ats-rewriter.js";
@@ -1109,9 +1109,14 @@ atsAnalyzeBtn.addEventListener("click", async () => {
     alert("Please upload a resume first.");
     return;
   }
-  if (!currentApiKey) {
+  if (activeLlm === "gemini" && !currentApiKey) {
     alert("Please configure your Gemini API key in Settings first.");
     showSettings(true);
+    return;
+  }
+  if (activeLlm === "ollama" && (!ollamaUrl || !ollamaModel)) {
+    alert("Please configure your Ollama server URL and model name in Settings first.");
+    showSettings(false);
     return;
   }
 
@@ -1122,7 +1127,12 @@ atsAnalyzeBtn.addEventListener("click", async () => {
   atsAnalyzeBtn.disabled = true;
 
   try {
-    const result = await scoreMatch({ jdText, resumeText, apiKey: currentApiKey });
+    let result;
+    if (activeLlm === "gemini") {
+      result = await scoreMatch({ jdText, resumeText, apiKey: currentApiKey });
+    } else {
+      result = await scoreMatchOllama({ jdText, resumeText, modelName: ollamaModel, ollamaUrl });
+    }
     atsMatchAnalysis = result;
 
     const score = result.score;
@@ -1173,8 +1183,14 @@ atsGenerateBtn.addEventListener("click", async () => {
     alert("Job description or resume content is missing.");
     return;
   }
-  if (!currentApiKey) {
+  if (activeLlm === "gemini" && !currentApiKey) {
     alert("Gemini API key is required.");
+    showSettings(true);
+    return;
+  }
+  if (activeLlm === "ollama" && (!ollamaUrl || !ollamaModel)) {
+    alert("Ollama URL and model name are required.");
+    showSettings(false);
     return;
   }
 
@@ -1185,12 +1201,23 @@ atsGenerateBtn.addEventListener("click", async () => {
   atsDownloadBlob = null;
 
   try {
-    const generator = rewriteForATS({
-      jdText,
-      resumeText,
-      matchedSkills,
-      apiKey: currentApiKey
-    });
+    let generator;
+    if (activeLlm === "gemini") {
+      generator = rewriteForATS({
+        jdText,
+        resumeText,
+        matchedSkills,
+        apiKey: currentApiKey
+      });
+    } else {
+      generator = rewriteForATSOllama({
+        jdText,
+        resumeText,
+        matchedSkills,
+        modelName: ollamaModel,
+        ollamaUrl
+      });
+    }
 
     let isFirstChunk = true;
 
@@ -1251,7 +1278,12 @@ atsDownloadDocxBtn.addEventListener("click", async () => {
     
     if (atsFileType === "docx" && atsDocxZip) {
       // Structure preserved docx flow using docx-editor
-      blob = await injectRewrittenText(atsDocxZip, atsOriginalParagraphs, atsOptimizedResume, currentApiKey);
+      blob = await injectRewrittenText(atsDocxZip, atsOriginalParagraphs, atsOptimizedResume, {
+        activeLlm,
+        apiKey: currentApiKey,
+        ollamaUrl,
+        ollamaModel
+      });
     } else {
       // Generate a standard DOCX from scratch using JSZip
       const JSZip = await loadJSZip();
